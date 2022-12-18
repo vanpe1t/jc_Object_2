@@ -13,6 +13,8 @@ public class Main {
         System.out.println(kiaSportage4thGen);
         System.out.println(hyundaiAvante);
 
+        Car unknownCar = new Car("", "", 0, "", 0, "");
+        System.out.println(unknownCar);
 
     }
 }

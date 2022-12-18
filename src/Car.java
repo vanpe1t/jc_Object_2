@@ -2,20 +2,51 @@ import java.util.Objects;
 
 public class Car {
 
-    private final String brand;
-    private final String model;
-    private final double engineVolume;
-    private final String color;
-    private final int year;
-    private final String country;
+    private String brand;
+    private String model;
+    private double engineVolume;
+    private String color;
+    private int year;
+    private String country;
 
     public Car(String brand, String model, double engineVolume, String color, int year, String country) {
-        this.brand = brand;
-        this.model = model;
-        this.engineVolume = engineVolume;
-        this.color = color;
-        this.year = year;
-        this.country = country;
+
+        if (brand == null || brand.equals("")) {
+            this.brand = "default";
+        } else {
+            this.brand = "brand";
+        }
+
+        if (model == null || model.equals("")) {
+            this.model = "default";
+        } else {
+            this.model = model;
+        }
+
+        if (country == null || country.equals("")) {
+            this.country = "default";
+        } else {
+            this.country = "country";
+        }
+
+        if (color == null || color.equals("")) {
+            this.color = "белый";
+        } else {
+            this.color = color;
+        }
+
+        if (engineVolume <= 0) {
+            this.engineVolume = 1.5;
+        } else {
+            this.engineVolume = engineVolume;
+        }
+
+        if (year <= 0) {
+            this.year = 2000;
+        } else {
+            this.year = year;
+        }
+
     }
 
     @Override
@@ -66,4 +97,27 @@ public class Car {
         return country;
     }
 
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public void setEngineVolume(double engineVolume) {
+        this.engineVolume = engineVolume;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
 }
