@@ -5,14 +5,9 @@ import java.util.Objects;
 import java.util.Date;
 
 
-public class Car {
+public class Car extends Transport{
 
-    private final String brand;
-    private final String model;
     private double engineVolume;
-    private String color;
-    private final int year;
-    private final String country;
 
     private String transmission;
 
@@ -44,7 +39,13 @@ public class Car {
         }
     }
 
-    public Car(String brand, String model, int year, String country, String bodyType, int numberOfSeats) {
+    public Car(String brand, String model, int year, String country, String bodyType, int numberOfSeats, String color) {
+
+        super(year, country);
+
+        setBrand(brand);
+        setModel(model);
+        setColor(color);
 
         if (bodyType == null || brand.isBlank() || brand.isEmpty()) {
             this.bodyType = "default";
@@ -58,40 +59,10 @@ public class Car {
             this.numberOfSeats = numberOfSeats;
         }
 
-        if (brand == null || brand.equals("")) {
-            this.brand = "default";
-        } else {
-            this.brand = "brand";
-        }
-
-        if (model == null || model.isEmpty() || model.isBlank()) {
-            this.model = "default";
-        } else {
-            this.model = model;
-        }
-
-        if (country == null || country.equals("")) {
-            this.country = "default";
-        } else {
-            this.country = "country";
-        }
-
-        if (color == null || color.equals("")) {
-            this.color = "белый";
-        } else {
-            this.color = color;
-        }
-
         if (engineVolume <= 0) {
             this.engineVolume = 1.5;
         } else {
             this.engineVolume = engineVolume;
-        }
-
-        if (year <= 0) {
-            this.year = 2000;
-        } else {
-            this.year = year;
         }
 
     }
@@ -99,12 +70,12 @@ public class Car {
     @Override
     public String toString() {
         return "Автомобиль " +
-                "марки: '" + brand + '\'' +
-                ", модель: '" + model + '\'' +
+                "марки: '" + getBrand() + '\'' +
+                ", модель: '" + getModel() + '\'' +
                 ", с объёмом двигателя: " + engineVolume +
-                ", цвет: '" + color + '\'' +
-                ", год: " + year +
-                ", страна производитель: '" + country + '\'' +
+                ", цвет: '" + getColor() + '\'' +
+                ", год: " + getYear() +
+                ", страна производитель: '" + getCountry() + '\'' +
                 ", тип шин: '" +  (typeTires ? "зимняя" : "летняя") + '\'' +
                 ", ключ: '" +  key  + '\'';
     }
@@ -114,36 +85,17 @@ public class Car {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Car car = (Car) o;
-        return Double.compare(car.engineVolume, engineVolume) == 0 && year == car.year && Objects.equals(brand, car.brand) && Objects.equals(model, car.model) && Objects.equals(color, car.color) && Objects.equals(country, car.country);
+        return Double.compare(car.engineVolume, engineVolume) == 0 && getYear() == car.getYear() && Objects.equals(getBrand(), car.getBrand()) && Objects.equals(getModel(), car.getModel())
+                && Objects.equals(getColor(), car.getColor()) && Objects.equals(getCountry(), car.getCountry());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(brand, model, engineVolume, color, year, country);
-    }
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public String getModel() {
-        return model;
+        return Objects.hash(getBrand(), getModel(), engineVolume, getColor(), getYear(), getCountry());
     }
 
     public double getEngineVolume() {
         return engineVolume;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public String getCountry() {
-        return country;
     }
 
     public String getTransmission() {
@@ -176,10 +128,6 @@ public class Car {
 
     public void setEngineVolume(double engineVolume) {
         this.engineVolume = engineVolume;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
     }
 
     public void setRegNumber(String regNumber) {
